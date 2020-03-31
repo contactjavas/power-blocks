@@ -71,7 +71,7 @@ function powerblocks_cgb_block_assets() {
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-power-blocks',
+		'powerblocks/testimonial',
 		array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
 			'style'         => 'powerblocks-styles',
