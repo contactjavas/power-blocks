@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  * @since 1.0.0
  */
 function powerblocks_cgb_block_assets() {
-	// Register block styles for both frontend + backend.
+	// Register block styles for both frontend + editor.
 	wp_register_style(
 		'powerblocks-styles',
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
@@ -33,7 +33,7 @@ function powerblocks_cgb_block_assets() {
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
-	// Register block editor script for backend.
+	// Register block editor script for editor.
 	wp_register_script(
 		'powerblocks-editor',
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
@@ -42,7 +42,7 @@ function powerblocks_cgb_block_assets() {
 		true
 	);
 
-	// Register block editor styles for backend.
+	// Register block editor styles for editor.
 	wp_register_style(
 		'powerblocks-editor',
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
