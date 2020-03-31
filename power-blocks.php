@@ -3,7 +3,7 @@
  * Plugin Name: Power Blocks
  * Plugin URI: https://github.com/MapSteps/power-blocks/
  * Description: Gutenberg blocks which are powerful enough to build your entire pages.
- * Author: MapSteps
+ * Author: David Vongries
  * Author URI: https://wp-powerblocks.com/
  * Version: 1.0.0
  * Text Domain: power-blocks
