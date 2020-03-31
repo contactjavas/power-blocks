@@ -8,10 +8,7 @@
  * @package CGB
  */
 
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
  * Enqueue Gutenberg block assets for both frontend + backend.
@@ -27,41 +24,40 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
-function power_blocks_cgb_block_assets() { // phpcs:ignore
+function powerblocks_cgb_block_assets() {
 	// Register block styles for both frontend + backend.
 	wp_register_style(
-		'power_blocks-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+		'powerblocks-styles',
+		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+		is_admin() ? array( 'wp-editor' ) : null,
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
 	// Register block editor script for backend.
 	wp_register_script(
-		'power_blocks-cgb-block-js', // Handle.
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
-		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
-		true // Enqueue the script in the footer.
+		'powerblocks-editor',
+		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
+		true
 	);
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'power_blocks-cgb-block-editor-css', // Handle.
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+		'powerblocks-editor',
+		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+		array( 'wp-edit-blocks' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
 	);
 
-	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.
+	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `powerBlocks` object.
 	wp_localize_script(
-		'power_blocks-cgb-block-js',
-		'cgbGlobal', // Array containing dynamic data for a JS Global.
-		[
-			'pluginDirPath' => plugin_dir_path( __DIR__ ),
-			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
-			// Add more data here that you want to access from `cgbGlobal` object.
-		]
+		'powerblocks-editor',
+		'powerBlocks',
+		array(
+			'pluginDir' => POWER_BLOCKS_PLUGIN_DIR,
+			'pluginUrl' => POWER_BLOCKS_PLUGIN_URL,
+		)
 	);
 
 	/**
@@ -75,16 +71,17 @@ function power_blocks_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'cgb/block-power-blocks', array(
+		'cgb/block-power-blocks',
+		array(
 			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'power_blocks-cgb-style-css',
+			'style'         => 'powerblocks-styles',
 			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'power_blocks-cgb-block-js',
+			'editor_script' => 'powerblocks-editor',
 			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'power_blocks-cgb-block-editor-css',
+			'editor_style'  => 'powerblocks-editor',
 		)
 	);
 }
 
 // Hook: Block assets.
-add_action( 'init', 'power_blocks_cgb_block_assets' );
+add_action( 'init', 'powerblocks_cgb_block_assets' );
