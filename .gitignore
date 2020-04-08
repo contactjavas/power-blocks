@@ -1,5 +1,6 @@
-node_modules
+# phpcs & editor's setting related
+.vscode/
+phpcs.xml
 
-## Uncomment line below if you prefer to
-## keep compiled files out of version control
-# dist/
+node_modules
+.cache/

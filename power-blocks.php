@@ -17,9 +17,9 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 define( 'POWER_BLOCKS_PLUGIN_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
 define( 'POWER_BLOCKS_PLUGIN_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
 define( 'POWER_BLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-define( 'POWER_BLOCKS_PLUGIN_VERSION', '1.0.0' );
+define( 'POWER_BLOCKS_PLUGIN_VERSION', '0.0.1' );
 
-/**
- * Block Initializer.
- */
-require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
+require __DIR__ . '/class-helper.php';
+require __DIR__ . '/class-setup.php';
+
+new PowerBlocks\Setup( true );

@@ -1,13 +1,32 @@
 {
-  "name": "power-blocks-cgb-guten-block",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "cgb-scripts start",
-    "build": "cgb-scripts build",
-    "eject": "cgb-scripts eject"
-  },
-  "dependencies": {
-    "cgb-scripts": "1.23.0"
-  }
+	"name": "power-blocks",
+	"version": "1.0.0",
+	"description": "Powerful Gutenberg blocks to build your website.",
+	"main": "build.js",
+	"keywords": [],
+	"author": "MapSteps",
+	"license": "MIT",
+	"scripts": {
+		"clean": "del-cli assets/css/* assets/js/*",
+		"start": "parcel src/index.html",
+		"parcel-build-js": "parcel build src/js/editor.js src/js/editor-frontend.js --out-dir assets/js --no-source-maps",
+		"parcel-build-scss": "parcel build src/scss/editor.scss src/scss/editor-frontend.scss --out-dir assets/css --no-source-maps",
+		"parcel-build": "npm-run-all --parallel parcel-build-js parcel-build-scss",
+		"parcel-watch-js": "parcel watch src/js/editor.js src/js/editor-frontend.js --out-dir assets/js --no-source-maps",
+		"parcel-watch-scss": "parcel watch src/scss/editor.scss src/scss/editor-frontend.scss --out-dir assets/css --no-source-maps",
+		"parcel-watch": "npm-run-all --parallel parcel-watch-js parcel-watch-scss"
+	},
+	"dependencies": {
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.9.0",
+		"@babel/preset-env": "^7.9.0",
+		"@babel/preset-react": "^7.9.4",
+		"npm-run-all": "^4.1.5",
+		"parcel-bundler": "^1.12.4",
+		"prettier": "^2.0.4",
+		"sass": "^1.26.3"
+	}
 }

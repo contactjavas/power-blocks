@@ -1,0 +1,1 @@
+import '../../blocks/testimonial/editor.js';
