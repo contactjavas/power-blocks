@@ -1,3 +1,18 @@
 @charset "utf-8";
 
-@import "../../blocks/testimonial/editor.scss";
+.pwb-control .pwb-input[type="search"] {
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 16px;
+}
+
+.pwb-control .pwb-input[type="search"] {
+	border-width: 0;
+}
+
+.pwb-control .pwb-input[type="search"]:focus {
+	box-shadow: none;
+}
+
+@import "../blocks/testimonial/editor.scss";
+@import "../blocks/subscribe-form/editor.scss";

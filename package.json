@@ -8,15 +8,21 @@
 	"license": "MIT",
 	"scripts": {
 		"clean": "del-cli assets/css/* assets/js/*",
-		"start": "parcel src/index.html",
-		"parcel-build-js": "parcel build src/js/editor.js src/js/editor-frontend.js --out-dir assets/js --no-source-maps",
-		"parcel-build-scss": "parcel build src/scss/editor.scss src/scss/editor-frontend.scss --out-dir assets/css --no-source-maps",
-		"parcel-build": "npm-run-all --parallel parcel-build-js parcel-build-scss",
-		"parcel-watch-js": "parcel watch src/js/editor.js src/js/editor-frontend.js --out-dir assets/js --no-source-maps",
-		"parcel-watch-scss": "parcel watch src/scss/editor.scss src/scss/editor-frontend.scss --out-dir assets/css --no-source-maps",
-		"parcel-watch": "npm-run-all --parallel parcel-watch-js parcel-watch-scss"
+		"bugfix": "del-cli assets/css/*.js",
+		"start": "",
+		"parcel-build-editor-js": "parcel build src/js/editor.js --out-dir assets/js --out-file editor.min.js --no-source-maps",
+		"parcel-build-blocks-js": "parcel build src/js/blocks.js --out-dir assets/js --out-file blocks.min.js --no-source-maps",
+		"parcel-build-editor-scss": "parcel build src/scss/editor.scss --out-dir assets/css --out-file editor.min.css --no-source-maps",
+		"parcel-build-blocks-scss": "parcel build src/scss/blocks.scss --out-dir assets/css --out-file blocks.min.css --no-source-maps",
+		"parcel-build": "npm-run-all --parallel parcel-build-editor-js parcel-build-blocks-js parcel-build-editor-scss parcel-build-blocks-scss fix-bug",
+		"parcel-watch-editor-js": "parcel watch src/js/editor.js --out-dir assets/js --out-file editor.min.js --no-source-maps",
+		"parcel-watch-blocks-js": "parcel watch src/js/blocks.js --out-dir assets/js --out-file blocks.min.js --no-source-maps",
+		"parcel-watch-editor-scss": "parcel watch src/scss/editor.scss --out-dir assets/css --out-file editor.min.css --no-source-maps",
+		"parcel-watch-blocks-scss": "parcel watch src/scss/blocks.scss --out-dir assets/css --out-file blocks.min.css --no-source-maps",
+		"parcel-watch": "npm-run-all --parallel parcel-watch-editor-js parcel-watch-blocks-js parcel-watch-editor-scss parcel-watch-blocks-scss"
 	},
 	"dependencies": {
+		"@wordpress/server-side-render": "^1.10.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
 	},
@@ -24,6 +30,8 @@
 		"@babel/core": "^7.9.0",
 		"@babel/preset-env": "^7.9.0",
 		"@babel/preset-react": "^7.9.4",
+		"del-cli": "^3.0.0",
+		"node-sass": "^4.13.1",
 		"npm-run-all": "^4.1.5",
 		"parcel-bundler": "^1.12.4",
 		"prettier": "^2.0.4",

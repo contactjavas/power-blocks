@@ -1,0 +1,16 @@
+.pwb-control .pwb-input[type="search"] {
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 16px; }
+
+.pwb-control .pwb-input[type="search"] {
+  border-width: 0; }
+
+.pwb-control .pwb-input[type="search"]:focus {
+  box-shadow: none; }
+
+.test {
+  color: #333333; }
+
+.test {
+  color: #333333; }

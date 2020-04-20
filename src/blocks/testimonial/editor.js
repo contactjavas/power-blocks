@@ -1,22 +1,13 @@
-const { __ } = wp.i18n; // Import __() from wp.i18n
-const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+const { serverSideRender: ServerSideRender } = wp;
+const { __ } = wp.i18n;
+const { registerBlockType } = wp.blocks;
+const { InspectorControls, RichText } = wp.editor;
+const { PanelBody } = wp.components;
+const { Fragment } = wp.element;
 
-/**
- * Register Gutenberg Block.
- *
- * Registers a new block provided a unique name and an object defining its
- * behavior. Once registered, the block is made editor as an option to any
- * editor interface where blocks are implemented.
- *
- * @link https://wordpress.org/gutenberg/handbook/block-api/
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
- * @return {?WPBlock}          The block, if it has been successfully
- *                             registered; otherwise `undefined`.
- */
 registerBlockType('powerblocks/testimonial', {
 	title: __('Testimonial'),
-	icon: 'comment',
+	icon: 'format-quote',
 	category: 'powerblocks',
 	keywords: [
 		__('power blocks'),
@@ -24,6 +15,12 @@ registerBlockType('powerblocks/testimonial', {
 		__('blocks'),
 		__('testimonial'),
 	],
+	attributes: powerblocksTestimonial.attributes,
+	example: {
+		attributes: {
+			content: 'Hello World',
+		},
+	},
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -37,13 +34,11 @@ registerBlockType('powerblocks/testimonial', {
 	 * @returns {Mixed} JSX Editor Component.
 	 */
 	edit: (props) => {
-		// Creates a <p class='wp-block-cgb-block-powerblocks'></p>.
+		console.log(props);
 		return (
 			<div className={props.className}>
 				<h3>Testimonial</h3>
-				<p>
-					A testimonial block by Power Blocks.
-				</p>
+				<ServerSideRender block="powerblocks/testimonial" attributes={props.attributes} />
 			</div>
 		);
 	},
@@ -60,13 +55,6 @@ registerBlockType('powerblocks/testimonial', {
 	 * @returns {Mixed} JSX Frontend HTML.
 	 */
 	save: (props) => {
-		return (
-			<div className={props.className}>
-				<h3>Testimonial</h3>
-				<p>
-					A testimonial block by Power Blocks.
-				</p>
-			</div>
-		);
+		return null;
 	},
 });

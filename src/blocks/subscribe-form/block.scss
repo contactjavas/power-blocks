@@ -1,0 +1,33 @@
+.pwb-subscribe-form {
+	.pwb-title {
+		margin-bottom: 10px;
+		line-height: 1.2;
+	}
+
+	.pwb-form {
+		margin-top: 30px;
+	}
+
+	.pwb-control.is-inline {
+		justify-content: center;
+	}
+
+	.pwb-input[type="search"],
+	.pwb-button {
+		display: block;
+		border-radius: 2px;
+	}
+
+	.pwb-input[type="search"] {
+		position: relative;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	.pwb-button {
+		position: relative;
+		left: -1px;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+}

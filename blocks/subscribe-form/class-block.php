@@ -1,14 +1,14 @@
 <?php
 /**
- * Testimonial block.
+ * Subscribe form block.
  *
  * @package Power_Blocks
  */
 
-namespace PowerBlocks\Blocks\Testimonial;
+namespace PowerBlocks\Blocks\SubscribeForm;
 
 /**
- * Setup testimonial block.
+ * Setup subscribe form block.
  */
 class Block {
 	/**
@@ -33,7 +33,7 @@ class Block {
 	public function localize_script() {
 		wp_localize_script(
 			'powerblocks-editor',
-			'powerblocksTestimonial',
+			'powerblocksSubscribeForm',
 			array(
 				'attributes' => $this->attributes,
 			)
@@ -45,10 +45,10 @@ class Block {
 	 */
 	public function register_block_type() {
 		register_block_type(
-			'powerblocks/testimonial',
+			'powerblocks/subscribe-form',
 			array(
-				'attributes'      => $this->attributes,
-				'render_callback' => array( $this, 'render_output' ),
+				'attributes' => $this->attributes,
+				// 'render_callback' => array( $this, 'render_output' ),
 			)
 		);
 	}

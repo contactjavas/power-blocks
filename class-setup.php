@@ -33,7 +33,7 @@ class Setup {
 		$this->register_block_types();
 
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_assets' ) );
-		add_action( 'enqueue_block_assets', array( $this, 'enqueue_editor_frontend_assets' ) );
+		add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
 	}
 
 	/**
@@ -52,10 +52,13 @@ class Setup {
 		foreach ( $scan as $path ) {
 			$explode    = explode( '/', $path );
 			$block_name = $explode[ count( $explode ) - 2 ];
+			$namespace  = str_ireplace( '-', ' ', $block_name );
+			$namespace  = ucwords( $namespace );
+			$namespace  = str_ireplace( ' ', '', $namespace );
 
 			require_once $path;
 
-			$class_name = '\PowerBlocks\\Blocks\\' . $block_name . '\\Block';
+			$class_name = '\\PowerBlocks\\Blocks\\' . $namespace . '\\Block';
 
 			new $class_name();
 		}
@@ -92,7 +95,7 @@ class Setup {
 		// Styles.
 		wp_enqueue_style(
 			'powerblocks-editor',
-			POWER_BLOCKS_PLUGIN_URL . '/assets/css/editor.css',
+			POWER_BLOCKS_PLUGIN_URL . '/assets/css/editor.min.css',
 			array( 'wp-edit-blocks' ),
 			POWER_BLOCKS_PLUGIN_VERSION
 		);
@@ -100,7 +103,7 @@ class Setup {
 		// Scripts.
 		wp_enqueue_script(
 			'powerblocks-editor',
-			POWER_BLOCKS_PLUGIN_URL . '/assets/js/editor.js',
+			POWER_BLOCKS_PLUGIN_URL . '/assets/js/editor.min.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api-fetch' ),
 			POWER_BLOCKS_PLUGIN_VERSION,
 			true
@@ -112,26 +115,26 @@ class Setup {
 	 *
 	 * @return void
 	 */
-	public function enqueue_editor_frontend_assets() {
+	public function enqueue_block_assets() {
 		// Styles.
 		wp_enqueue_style(
-			'powerblocks-editor-frontend',
-			POWER_BLOCKS_PLUGIN_URL . '/assets/css/editor-frontend.css',
+			'powerblocks-blocks',
+			POWER_BLOCKS_PLUGIN_URL . '/assets/css/blocks.min.css',
 			array( 'wp-edit-blocks' ),
 			POWER_BLOCKS_PLUGIN_VERSION
 		);
 
 		// Scripts.
 		wp_enqueue_script(
-			'powerblocks-editor-frontend',
-			POWER_BLOCKS_PLUGIN_URL . '/assets/js/editor-frontend.js',
+			'powerblocks-blocks',
+			POWER_BLOCKS_PLUGIN_URL . '/assets/js/blocks.min.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api-fetch' ),
 			POWER_BLOCKS_PLUGIN_VERSION,
 			true
 		);
 
 		wp_localize_script(
-			'powerblocks-editor-frontend',
+			'powerblocks-blocks',
 			'powerblocks',
 			array(
 				'homeUrl'       => home_url(),
