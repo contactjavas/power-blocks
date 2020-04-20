@@ -63,18 +63,27 @@ registerBlockType('powerblocks/subscribe-form', {
 			align,
 			title,
 			description,
+			note,
 			contentAlignment,
 			sectionSize,
 			sectionBgColor,
 			containerSize,
 			boxWidth,
+			boxVerticalPadding,
+			boxBorderRadius,
 			boxBgColor,
 			formAction,
 			formName,
+			fieldHeight,
+			inputBorderWidth,
+			inputBorderColor,
+			fieldBorderRadius,
 			inputName,
 			inputWidth,
-			emailPlaceholder,
-			submitButtonText
+			inputPlaceholder,
+			submitButtonText,
+			submitButtonBgColor,
+			submitButtonTextColor
 		} = attributes;
 
 		return (
@@ -82,7 +91,7 @@ registerBlockType('powerblocks/subscribe-form', {
 
 				<InspectorControls>
 
-					<PanelBody title={__('Layout Options', 'power-blocks')}>
+					<PanelBody title={__('Layout Settings', 'power-blocks')}>
 
 						<SelectControl
 							label={__("Section Size")}
@@ -112,11 +121,61 @@ registerBlockType('powerblocks/subscribe-form', {
 						/>
 
 						<RangeControl
-							label={__("Form Width (%)")}
+							label={__("Box Width (%)")}
 							value={boxWidth}
 							onChange={(value) => setAttributes({ boxWidth: value })}
 							min={0}
 							max={100}
+							separatorType="fullWidth"
+							allowReset
+						/>
+
+						<RangeControl
+							label={__("Box Vertical Padding (px)")}
+							value={boxVerticalPadding}
+							onChange={(value) => setAttributes({ boxVerticalPadding: value })}
+							min={0}
+							max={300}
+							separatorType="fullWidth"
+							allowReset
+						/>
+
+						<RangeControl
+							label={__("Box Border Radius (px)")}
+							value={boxBorderRadius}
+							onChange={(value) => setAttributes({ boxBorderRadius: value })}
+							min={0}
+							max={100}
+							separatorType="fullWidth"
+							allowReset
+						/>
+
+						<RangeControl
+							label={__("Field Height (px)")}
+							value={fieldHeight}
+							onChange={(value) => setAttributes({ fieldHeight: value })}
+							min={20}
+							max={100}
+							separatorType="fullWidth"
+							allowReset
+						/>
+
+						<RangeControl
+							label={__("Field Border Radius (px)")}
+							value={fieldBorderRadius}
+							onChange={(value) => setAttributes({ fieldBorderRadius: value })}
+							min={0}
+							max={100}
+							separatorType="fullWidth"
+							allowReset
+						/>
+
+						<RangeControl
+							label={__("Input Border Width (px)")}
+							value={inputBorderWidth}
+							onChange={(value) => setAttributes({ inputBorderWidth: value })}
+							min={0}
+							max={50}
 							separatorType="fullWidth"
 							allowReset
 						/>
@@ -147,6 +206,21 @@ registerBlockType('powerblocks/subscribe-form', {
 								onChange: (value) => setAttributes({ boxBgColor: value }),
 								label: __("Box Background Color"),
 							},
+							{
+								value: inputBorderColor,
+								onChange: (value) => setAttributes({ inputBorderColor: value }),
+								label: __("Input Border Color"),
+							},
+							{
+								value: submitButtonBgColor,
+								onChange: (value) => setAttributes({ submitButtonBgColor: value }),
+								label: __("Button Background Color"),
+							},
+							{
+								value: submitButtonTextColor,
+								onChange: (value) => setAttributes({ submitButtonTextColor: value }),
+								label: __("Button Text Color"),
+							},
 						]}
 					>
 					</PanelColorSettings>
@@ -171,8 +245,11 @@ registerBlockType('powerblocks/subscribe-form', {
 							<div
 								class={"pwb-box pwb-has-text-" + contentAlignment}
 								style={{
+									paddingTop: boxVerticalPadding + 'px',
+									paddingBottom: boxVerticalPadding + 'px',
 									backgroundColor: boxBgColor,
 									maxWidth: boxWidth + "%",
+									borderRadius: boxBorderRadius + "px"
 								}}
 							>
 
@@ -195,17 +272,50 @@ registerBlockType('powerblocks/subscribe-form', {
 								<form action={formAction} name={formName} class="pwb-form" onSubmit={(e) => e.preventDefault()}>
 									<div class="pwb-field">
 										<div class="pwb-control is-inline">
-											<input type="search" name={inputName} class="pwb-input" style={{ width: inputWidth + "%" }} placeholder={emailPlaceholder} />
-											<RichText
-												tagName="button"
-												className="pwb-button"
-												value={submitButtonText}
-												withoutInteractiveFormatting
-												onChange={(value) => setAttributes({ submitButtonText: value })}
+											<input
+												type="email"
+												name={inputName}
+												class="pwb-input"
+												placeholder={inputPlaceholder}
+												style={{
+													width: inputWidth + "%",
+													height: fieldHeight + "px",
+													borderTopLeftRadius: fieldBorderRadius + "px",
+													borderBottomLeftRadius: fieldBorderRadius + "px",
+													borderLeftWidth: inputBorderWidth + "px",
+													borderTopWidth: inputBorderWidth + "px",
+													borderBottomWidth: inputBorderWidth + "px",
+													borderColor: inputBorderColor
+												}}
 											/>
+											<button
+												class="pwb-button"
+												style={{
+													height: fieldHeight + "px",
+													color: submitButtonTextColor,
+													backgroundColor: submitButtonBgColor,
+													borderTopRightRadius: fieldBorderRadius + "px",
+													borderBottomRightRadius: fieldBorderRadius + "px",
+												}}
+											>
+												<RichText
+													tagName="span"
+													value={submitButtonText}
+													withoutInteractiveFormatting
+													onChange={(value) => setAttributes({ submitButtonText: value })}
+												/>
+											</button>
 										</div>
 									</div>
 								</form>
+
+								<RichText
+									tagName="div"
+									className="pwb-note"
+									value={note}
+									style={{ textAlign: contentAlignment }}
+									onChange={(value) => setAttributes({ note: value })}
+								/>
 
 							</div>
 						</div>
@@ -237,18 +347,27 @@ registerBlockType('powerblocks/subscribe-form', {
 			align,
 			title,
 			description,
+			note,
 			contentAlignment,
 			sectionSize,
 			sectionBgColor,
 			containerSize,
 			boxWidth,
+			boxVerticalPadding,
+			boxBorderRadius,
 			boxBgColor,
 			formAction,
 			formName,
+			fieldHeight,
+			inputBorderWidth,
+			inputBorderColor,
+			fieldBorderRadius,
 			inputName,
 			inputWidth,
-			emailPlaceholder,
-			submitButtonText
+			inputPlaceholder,
+			submitButtonText,
+			submitButtonBgColor,
+			submitButtonTextColor
 		} = attributes;
 
 		return (
@@ -265,8 +384,11 @@ registerBlockType('powerblocks/subscribe-form', {
 							<div
 								class={"pwb-box pwb-has-text-" + contentAlignment}
 								style={{
+									paddingTop: boxVerticalPadding + 'px',
+									paddingBottom: boxVerticalPadding + 'px',
 									backgroundColor: boxBgColor,
 									maxWidth: boxWidth + "%",
+									borderRadius: boxBorderRadius + "px"
 								}}
 							>
 
@@ -285,15 +407,45 @@ registerBlockType('powerblocks/subscribe-form', {
 								<form action={formAction} name={formName} class="pwb-form">
 									<div class="pwb-field">
 										<div class="pwb-control is-inline">
-											<input type="search" name={inputName} class="pwb-input" style={{ width: inputWidth + "%" }} placeholder={emailPlaceholder} />
-											<RichText.Content
-												tagName="button"
-												className="pwb-button"
-												value={submitButtonText}
+											<input
+												type="email"
+												name={inputName}
+												class="pwb-input"
+												placeholder={inputPlaceholder}
+												style={{
+													width: inputWidth + "%",
+													height: fieldHeight + "px",
+													borderTopLeftRadius: fieldBorderRadius + "px",
+													borderBottomLeftRadius: fieldBorderRadius + "px",
+													borderLeftWidth: inputBorderWidth + "px",
+													borderTopWidth: inputBorderWidth + "px",
+													borderBottomWidth: inputBorderWidth + "px",
+													borderColor: inputBorderColor
+												}}
 											/>
+											<button
+												class="pwb-button"
+												style={{
+													height: fieldHeight + "px",
+													color: submitButtonTextColor,
+													backgroundColor: submitButtonBgColor,
+													borderTopRightRadius: fieldBorderRadius + "px",
+													borderBottomRightRadius: fieldBorderRadius + "px",
+												}}
+											>
+												{submitButtonText}
+											</button>
 										</div>
 									</div>
 								</form>
+
+								<RichText.Content
+									tagName="div"
+									className="pwb-note"
+									value={note}
+									style={{ textAlign: contentAlignment }}
+									onChange={(value) => setAttributes({ note: value })}
+								/>
 
 							</div>
 						</div>

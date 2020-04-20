@@ -89,6 +89,18 @@
 
 .pwb-box .pwb-title {
 	margin-bottom: 15px;
+	font-size: 34px;
+	color: #333;
+}
+
+.pwb-box .pwb-description {
+	font-size: 16px;
+	color: #444;
+}
+
+.pwb-box .pwb-note {
+	font-size: 14px;
+	color: #676767;
 }
 
 .pwb-input {
@@ -105,9 +117,9 @@
 }
 
 .pwb-button {
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 0 20px;
 	height: 50px;
+	background-color: #eee;
 	border-width: 0;
 	border-radius: 2px;
 }

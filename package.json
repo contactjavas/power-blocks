@@ -14,7 +14,7 @@
 		"parcel-build-blocks-js": "parcel build src/js/blocks.js --out-dir assets/js --out-file blocks.min.js --no-source-maps",
 		"parcel-build-editor-scss": "parcel build src/scss/editor.scss --out-dir assets/css --out-file editor.min.css --no-source-maps",
 		"parcel-build-blocks-scss": "parcel build src/scss/blocks.scss --out-dir assets/css --out-file blocks.min.css --no-source-maps",
-		"parcel-build": "npm-run-all --parallel parcel-build-editor-js parcel-build-blocks-js parcel-build-editor-scss parcel-build-blocks-scss fix-bug",
+		"parcel-build": "npm-run-all --parallel parcel-build-editor-js parcel-build-blocks-js parcel-build-editor-scss parcel-build-blocks-scss bugfix",
 		"parcel-watch-editor-js": "parcel watch src/js/editor.js --out-dir assets/js --out-file editor.min.js --no-source-maps",
 		"parcel-watch-blocks-js": "parcel watch src/js/blocks.js --out-dir assets/js --out-file blocks.min.js --no-source-maps",
 		"parcel-watch-editor-scss": "parcel watch src/scss/editor.scss --out-dir assets/css --out-file editor.min.css --no-source-maps",

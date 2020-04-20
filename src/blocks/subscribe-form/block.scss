@@ -1,25 +1,45 @@
 .pwb-subscribe-form {
+	.pwb-box {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
 	.pwb-title {
-		margin-bottom: 10px;
+		margin-bottom: 15px;
 		line-height: 1.2;
 	}
 
+	.pwb-description {
+		line-height: 1.6;
+	}
+
 	.pwb-form {
-		margin-top: 30px;
+		margin-top: 20px;
+		margin-bottom: 15px;
+		width: 100%;
+	}
+	
+	.pwb-title,
+	.pwb-description,
+	.pwb-note {
+		width: 100%;
+		max-width: 75%;
 	}
 
 	.pwb-control.is-inline {
 		justify-content: center;
 	}
 
-	.pwb-input[type="search"],
+	.pwb-input[type="email"],
 	.pwb-button {
 		display: block;
 		border-radius: 2px;
 	}
 
-	.pwb-input[type="search"] {
+	.pwb-input[type="email"] {
 		position: relative;
+		border-width: 0;
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
 	}
